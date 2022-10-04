@@ -7,7 +7,7 @@ Oppgaven er levert av følgende studenter:
 
 -Nabil Hassen, s336115, s336115@oslomet.no
 
--Haris, s362062, s362062@oslomet.no
+-Haris Maroof, s362062, s362062@oslomet.no
 
 -Ingrid Lunde, s338231, s338231@oslomet.no
 
