@@ -67,7 +67,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException();
+        //Sjekke om listen som kommer inn er tom
+
+        //For-løkke for å iterere og sjekke om hode har en peker
+
+        //ekstra for null?
+
+        //if-else setning for å sjekke om listen er tom.
+        // Er listen tom returneres false. Har listen elementer returneres true.
+        return true;
     }
 
     @Override
