@@ -45,7 +45,35 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Liste<T> subliste(int fra, int til) {
-        throw new UnsupportedOperationException();
+        //skjekker om fra og til er lovlige argumenter og er innenfor listen sin lengde ved fratilKontroll metoden
+        fratilKontroll(antall,fra,til);
+
+        //Henter hode og legger det inn i en objekt av Node<T>
+        Node<T> noden = hode;
+
+        //Bruker for løkke siden her vet vi hvor mange ganger løkken skal kjøres
+        //flytter hoden til noden til noden med fra indeks
+        for (int i = 0; i < fra; i++){
+            noden = noden.neste;
+        }
+
+        //Oppretter liste av T node class som skal holde node verdiene
+        T[] sublisteInn = (T[]) new Object[til-fra];
+
+        int indeks = 0;
+
+        //fyller sublisteInn med verdier [fra-til> noder ved bruk av for løkke
+        //etter det oppdaterer noden til neste node for å legge inn, øker også indeks for å bruke til å hente neste node
+        for (int i = fra; i < til; i++){
+            sublisteInn[indeks] = noden.verdi;
+            noden = noden.neste;
+            indeks++;
+        }
+
+        //oppretter sublisten og fyller den for å returnere
+        DobbeltLenketListe<T> subliste = new DobbeltLenketListe<>(sublisteInn);
+
+        return subliste;
     }
 
     @Override
@@ -75,7 +103,47 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        throw new UnsupportedOperationException();
+        //Skjekker om indeksen er gyldig eller ugyldig
+        indeksKontroll(indeks,false);
+
+        //Finner noden til indeks med finnNode metoden og legger inn i en variabel av Node<T>
+        Node<T> returNode = finnNode(indeks);
+
+        //returnere verdien til noden
+        return returNode.verdi;
+    }
+
+    //private hjelpemetoden for å returnere noden til den gitte indeksen
+    private Node<T> finnNode(int indeks){
+        Node<T> returNode;
+
+        //Vis indeksen er mindre enn antall/2 starter letingen etter noden fra hodet og går mot høyre ved hjelp av neste-pekere
+        if (indeks < antall/2){
+            returNode = hode;
+            int i = 0;
+
+            //bruker while løkke siden spørringene gjøres ukjent mange ganger
+            //Beveger mot høyre og setter neturNode til neste verdi til i ikke er mindre enn indeks
+            while (i < indeks){
+                returNode = returNode.neste;
+                i++;
+            }
+        }
+
+        //vis indeksen er større eller lik antall/2 starter letingen etter noden fra halen og går mot venstre ved hjelp av forrige-pekere
+        else {
+            returNode = hale;
+            int i = antall-1;
+
+            //bruker while løkke siden spørringene gjøres ukjent mange ganger
+            //Beveger mot venstre og setter neturNode til forrige verdi til i ikke er større eller lik indeks
+            while (i > indeks){
+                returNode = returNode.forrige;
+                i--;
+            }
+        }
+
+        return returNode;
     }
 
     @Override
@@ -85,7 +153,28 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
+        //Skjekker om nyverdi er null og kaster unntak vis den er
+        if (nyverdi ==  null) {
+            throw new NullPointerException("Ny verdi kan ikke være null, gi ny verdi");
+        }
+
+        //Skjekker om indeksen er gyldig eller ugyldig
+        indeksKontroll(indeks,false);
+
+        //Finner noden til indeks med finnNode metoden og legger inn i en variabel av Node<T>
+        Node<T> node = finnNode(indeks);
+
+        //henter nåværende verdi for å returnere og før den oppdateres
+        T gammelVerdi = node.verdi;
+
+        //Oppdaterer noden sin verdi til nyverdi som kommer inn som parameter
+        node.verdi = nyverdi;
+
+        //legger til en økning i endringer teller variablen med 1
+        endringer++;
+
+        //returnerer gammel node verdi altså før den ble oppdatert
+        return gammelVerdi;
     }
 
     @Override
