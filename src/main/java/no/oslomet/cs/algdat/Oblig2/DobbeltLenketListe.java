@@ -68,9 +68,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new UnsupportedOperationException();
     }
 
+
     @Override
     public boolean inneholder(T verdi) {
-        throw new UnsupportedOperationException();
+        if (indeksTil(verdi) > -1) { // linje/krav fra setning 4, oppgave 4
+            return true;
+        } else  // Else alltid return false
+        return false;
     }
 
     @Override
@@ -78,9 +82,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new UnsupportedOperationException();
     }
 
+
     @Override
     public int indeksTil(T verdi) {
-        throw new UnsupportedOperationException();
+        Node<T> peker = hode;
+
+        for (int i =0; i<antall; i++) {
+
+            if (peker.verdi.equals(verdi)) {
+                return i;// vil denne returne oss helt ut av hele greia
+            }
+            peker=peker.neste;
+        }
+        return -1; //tilfeldring tall
     }
 
     @Override
