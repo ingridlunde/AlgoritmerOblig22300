@@ -101,7 +101,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean inneholder(T verdi) {
         if (indeksTil(verdi) > -1) { // linje/krav fra setning 4, oppgave 4
             return true;
-        } else  // Else alltid return false
+        } else  // Else alltid return false.
         return false;
     }
 
