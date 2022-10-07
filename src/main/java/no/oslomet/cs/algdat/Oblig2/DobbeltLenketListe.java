@@ -45,7 +45,35 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Liste<T> subliste(int fra, int til) {
-        throw new UnsupportedOperationException();
+        //skjekker om fra og til er lovlige argumenter og er innenfor listen sin lengde ved fratilKontroll metoden
+        fratilKontroll(antall,fra,til);
+
+        //Henter hode og legger det inn i en objekt av Node<T>
+        Node<T> noden = hode;
+
+        //Bruker for løkke siden her vet vi hvor mange ganger løkken skal kjøres
+        //flytter hoden til noden til noden med fra indeks
+        for (int i = 0; i < fra; i++){
+            noden = noden.neste;
+        }
+
+        //Oppretter liste av T node class som skal holde node verdiene
+        T[] sublisteInn = (T[]) new Object[til-fra];
+
+        int indeks = 0;
+
+        //fyller sublisteInn med verdier [fra-til> noder ved bruk av for løkke
+        //etter det oppdaterer noden til neste node for å legge inn, øker også indeks for å bruke til å hente neste node
+        for (int i = fra; i < til; i++){
+            sublisteInn[indeks] = noden.verdi;
+            noden = noden.neste;
+            indeks++;
+        }
+
+        //oppretter sublisten og fyller den for å returnere
+        DobbeltLenketListe<T> subliste = new DobbeltLenketListe<>(sublisteInn);
+
+        return subliste;
     }
 
     @Override
