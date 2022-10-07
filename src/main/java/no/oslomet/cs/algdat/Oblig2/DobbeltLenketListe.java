@@ -53,10 +53,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Setter current node til hode i lenkelt liste
 
         //Legger inn en if hvis listen har null -- sender nullexeption
-
+        if (node.hode == 0) {
+            return 0;
+        }
         //Legger inn en if for å plukke opp hvis listen er 0
 
         //Bruker en for-løkke for å telle gjennom listen som kommer inn.
+        for(int i = 0; i < hale; i++) {
+            antall = ++;
+        }
         //Flytter pekeren fra hod og til neste, helt til hale.
         //Lager en tellevariabel som teller hvor lang listen er.
         //Må finne ut hvordan den skal stoppe på hale(dobbeltlenket)
