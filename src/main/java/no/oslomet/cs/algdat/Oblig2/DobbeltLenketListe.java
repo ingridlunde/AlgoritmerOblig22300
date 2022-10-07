@@ -75,7 +75,47 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        throw new UnsupportedOperationException();
+        //Skjekker om indeksen er gyldig eller ugyldig
+        indeksKontroll(indeks,false);
+
+        //Finner noden til indeks med finnNode metoden og legger inn i en variabel av Node<T>
+        Node<T> returNode = finnNode(indeks);
+
+        //returnere verdien til noden
+        return returNode.verdi;
+    }
+
+    //private hjelpemetoden for å returnere noden til den gitte indeksen
+    private Node<T> finnNode(int indeks){
+        Node<T> returNode;
+
+        //Vis indeksen er mindre enn antall/2 starter letingen etter noden fra hodet og går mot høyre ved hjelp av neste-pekere
+        if (indeks < antall/2){
+            returNode = hode;
+            int i = 0;
+
+            //bruker while løkke siden spørringene gjøres ukjent mange ganger
+            //Beveger mot høyre og setter neturNode til neste verdi til i ikke er mindre enn indeks
+            while (i < indeks){
+                returNode = returNode.neste;
+                i++;
+            }
+        }
+
+        //vis indeksen er større eller lik antall/2 starter letingen etter noden fra halen og går mot venstre ved hjelp av forrige-pekere
+        else {
+            returNode = hale;
+            int i = antall-1;
+
+            //bruker while løkke siden spørringene gjøres ukjent mange ganger
+            //Beveger mot venstre og setter neturNode til forrige verdi til i ikke er større eller lik indeks
+            while (i > indeks){
+                returNode = returNode.forrige;
+                i--;
+            }
+        }
+
+        return returNode;
     }
 
     @Override
@@ -85,7 +125,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
+        //Skjekker om nyverdi er null og kaster unntak vis den er
+        if (nyverdi ==  null) {
+            throw new NullPointerException("Ny verdi kan ikke være null, gi ny verdi");
+        }
     }
 
     @Override
