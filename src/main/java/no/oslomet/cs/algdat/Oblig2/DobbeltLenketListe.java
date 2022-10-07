@@ -129,6 +129,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (nyverdi ==  null) {
             throw new NullPointerException("Ny verdi kan ikke være null, gi ny verdi");
         }
+
+        //Skjekker om indeksen er gyldig eller ugyldig
+        indeksKontroll(indeks,false);
+
+        //Finner noden til indeks med finnNode metoden og legger inn i en variabel av Node<T>
+        Node<T> node = finnNode(indeks);
+
+        //henter nåværende verdi for å returnere og før den oppdateres
+        T gammelVerdi = node.verdi;
+
+        //Oppdaterer noden sin verdi til nyverdi som kommer inn som parameter
+        node.verdi = nyverdi;
+
+        //legger til en økning i endringer teller variablen med 1
+        endringer++;
+
+        //returnerer gammel node verdi altså før den ble oppdatert
+        return gammelVerdi;
     }
 
     @Override
