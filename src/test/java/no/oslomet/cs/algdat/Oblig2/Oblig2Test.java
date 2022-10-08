@@ -9,9 +9,6 @@ class Oblig2Test {
     ////// Oppgave 1 /////////////////////
     @org.junit.jupiter.api.Test
     void oppgave1() {
-        String[] s = {"Ole", null, "Per", "Kari", null};
-        Liste<String> liste1 = new DobbeltLenketListe<>(s);
-        System.out.println(liste1.antall() + " " + liste1.tom());
 
         int antallFeil = 0;
         Liste<Integer> liste = new DobbeltLenketListe<>();

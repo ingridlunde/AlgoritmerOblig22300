@@ -57,18 +57,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Lager en if setning for å plassere hode peker. Viktig å passe på at elementene i starten av array kan
         //være null. Må derfor traversere gjennon med en for-løkke.
         if (a.length > 0) {
-            for (int i = 0; i < a.length; i++) {
-                if(a[i] != null) {
-                    hode = new Node (a[i]);
-                    antall ++;
+            //int i er satt utenfor for løkken fordi vi bruker break når hode er inistiert.
+            // Men vi vil vite hvilken index den er på (det kan være flere null i arrayet før vi får en verdi).
+            int i = 0;
+            for (; i < a.length; i++) {
+                if (a[i] != null) {
+                    hode = new Node(a[i]);
                     break;
                 }
+            }
 
-                //Setter nodene hale til hode. Hvis det ikke er flere noder vil ikke den gå inn i flere og returnerer
-                //en med antall 1, Der både hode og hale peker på samme; 
-        /*if (a.length == 1 && a[0] != null) {
-            hale = hode;
-            break; */
                 //Setter hale og hode til å bli lik. Hvis den ikke går inn i mer nå. Returneres 1 og
                 // hale og hode peker på samme.
                 hale = hode; 
@@ -86,9 +84,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                             //verdi, deretter hale som var forrige og neste er fremdeles null.
                             hale.neste = new Node <> (a[i], hale, null);
 
-                            //FLytter pekeren fra hale til hale sin neste før antalle økes og for løkka looper på nytt
+                            //FLytter hale til hale.neste. Hale skal alltid være tilslutt. Derfor gjør vi dette.
                             hale = hale.neste;
-                            antall ++;
+
                         }
 
                     }
@@ -98,8 +96,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
             
         }
-
-    }
 
     public Liste<T> subliste(int fra, int til) {
         //skjekker om fra og til er lovlige argumenter og er innenfor listen sin lengde ved fratilKontroll metoden
