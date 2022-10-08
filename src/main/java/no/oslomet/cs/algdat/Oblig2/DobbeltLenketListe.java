@@ -9,7 +9,6 @@ import java.util.Iterator;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
-
     /**
      * Node class
      *
@@ -50,21 +49,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        //Setter current node til hode i lenkelt liste
+        //Setter antall til 0;
+        antall = 0;
 
-        //Legger inn en if hvis listen har null -- sender nullexeption
-        if (node.hode == 0) {
-            return 0;
+        //Lager en current Nodevariabel
+        Node current = hode;
+        //Legger inn en if hvis listen har null -- sender nullexception
+        if (current == null) {
+            //Sender null exception
         }
-        //Legger inn en if for å plukke opp hvis listen er 0
 
-        //Bruker en for-løkke for å telle gjennom listen som kommer inn.
-        for(int i = 0; i < hale; i++) {
-            antall = ++;
+        //Bruker en while løkke for å gå gjennom dobbel lenket liste helt til pekeren peker på null.
+        while (current != null) {
+            antall ++;
+            //Flytter pekeren fra node til neste node og sjekker om vi skal inn i while-løkka igjen.
+            current = current.neste;
         }
-        //Flytter pekeren fra hod og til neste, helt til hale.
-        //Lager en tellevariabel som teller hvor lang listen er.
-        //Må finne ut hvordan den skal stoppe på hale(dobbeltlenket)
+         //Må finne ut hvordan jeg løser når listen er 0;
 
         //returnerer antallet/lengden på listern
       return antall;
@@ -73,14 +74,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public boolean tom() {
         //Sjekke om listen som kommer inn er tom
+        Node current = hode;
+        //While-løkke for å iterere og sjekke om hode har en peker
+        if (current != null) {
+            return true;
+        }
 
-        //For-løkke for å iterere og sjekke om hode har en peker
-
-        //ekstra for null?
-
-        //if-else setning for å sjekke om listen er tom.
-        // Er listen tom returneres false. Har listen elementer returneres true.
-        return true;
+        // Er listen tom returneres false.
+        return false;
     }
 
     @Override
