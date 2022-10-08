@@ -9,7 +9,6 @@ import java.util.Iterator;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
-
     /**
      * Node class
      *
@@ -78,12 +77,39 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        throw new UnsupportedOperationException();
+        //Setter antall til 0;
+        antall = 0;
+
+        //Lager en current Nodevariabel
+        Node current = hode;
+        //Legger inn en if hvis listen har null -- sender nullexception
+        if (current == null) {
+            //Sender null exception
+        }
+
+        //Bruker en while løkke for å gå gjennom dobbel lenket liste helt til pekeren peker på null.
+        while (current != null) {
+            antall ++;
+            //Flytter pekeren fra node til neste node og sjekker om vi skal inn i while-løkka igjen.
+            current = current.neste;
+        }
+         //Må finne ut hvordan jeg løser når listen er 0;
+
+        //returnerer antallet/lengden på listern
+      return antall;
     }
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException();
+        //Sjekke om listen som kommer inn er tom
+        Node current = hode;
+        //While-løkke for å iterere og sjekke om hode har en peker
+        if (current != null) {
+            return true;
+        }
+
+        // Er listen tom returneres false.
+        return false;
     }
 
     @Override
