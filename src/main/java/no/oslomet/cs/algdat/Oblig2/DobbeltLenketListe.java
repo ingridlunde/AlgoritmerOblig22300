@@ -45,10 +45,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public DobbeltLenketListe(T[] a) {
         //Lager en if setning som kaster en nullpointexception hvis listen er tom
-        //if (a == null) {
-            //throw new NullPointerException("Tabell a er null!");
-        throw new UnsupportedOperationException("heihei");
+        if (a == null) {
+            throw new NullPointerException("Tabell a er null!");
+
         }
+    }
 
         //Inisiterer pekere hode og hale
 
@@ -121,6 +122,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (current != null) {
             return true;
         }
+
+
 
         // Er listen tom returneres false.
         return false;
