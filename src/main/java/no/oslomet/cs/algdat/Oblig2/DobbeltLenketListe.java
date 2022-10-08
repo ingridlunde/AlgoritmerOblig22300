@@ -11,8 +11,9 @@ import java.util.Iterator;
 public class DobbeltLenketListe<T> implements Liste<T> {
 
     public static void main (String [] args) {
-        Liste<String> liste = new DobbeltLenketListe<>();
-        System.out.println(liste.antall() + " " + liste.tom());
+        String[] s = {"Ole", null, "Per", "Kari", null};
+        Liste<String> liste1 = new DobbeltLenketListe<>(s);
+        System.out.println(liste1.antall() + " " + liste1.tom());  
     }
     /**
      * Node class
@@ -41,22 +42,64 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
+        hode = null;
+        hale = null;
+        antall = 0;
+        endringer = 0; 
     }
 
     public DobbeltLenketListe(T[] a) {
         //Lager en if setning som kaster en nullpointexception hvis listen er tom
         if (a == null) {
             throw new NullPointerException("Tabell a er null!");
-
         }
+
+        //Lager en if setning for å plassere hode peker. Viktig å passe på at elementene i starten av array kan
+        //være null. Må derfor traversere gjennon med en for-løkke.
+        if (a.length > 0) {
+            for (int i = 0; i < a.length; i++) {
+                if(a[i] != null) {
+                    hode = new Node (a[i]);
+                    antall ++;
+                    break;
+                }
+
+                //Setter nodene hale til hode. Hvis det ikke er flere noder vil ikke den gå inn i flere og returnerer
+                //en med antall 1, Der både hode og hale peker på samme; 
+        /*if (a.length == 1 && a[0] != null) {
+            hale = hode;
+            break; */
+                //Setter hale og hode til å bli lik. Hvis den ikke går inn i mer nå. Returneres 1 og
+                // hale og hode peker på samme.
+                hale = hode; 
+
+                //Traverserer deretter gjennom resten av arrayet og går bare inn i if-setningen når hale ikke er null.
+                if (hale != null) {
+                    // Legger til i for å komme på indeks 1 i arrayet.
+                    i ++;
+                    //Looper gjennom resten av arrayet for å legge det i listen
+                    for (; i < a.length; i++) {
+                     //Sjekker hvert element for om det er null
+                        if (a[i] != null) {
+                            //inistierer konstruktøren med å legge inn ny verdi på hale sin neste.
+                            //Har satt hale til å være lik hode til å begynne med.
+                            //verdi, deretter hale som var forrige og neste er fremdeles null.
+                            hale.neste = new Node <> (a[i], hale, null);
+
+                            //FLytter pekeren fra hale til hale sin neste før antalle økes og for løkka looper på nytt
+                            hale = hale.neste;
+                            antall ++;
+                        }
+
+                    }
+
+
+                }
+            }
+            
+        }
+
     }
-
-        //Inisiterer pekere hode og hale
-
-
-        //Hvis tabell a har kun en verdi som ikke er null vil hode hale peke på samme
-
-        //Hvis a er tom(lengde 0) skal det ikke opprettes noder. Hode hale fremdeles null
 
     public Liste<T> subliste(int fra, int til) {
         //skjekker om fra og til er lovlige argumenter og er innenfor listen sin lengde ved fratilKontroll metoden
@@ -93,7 +136,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public int antall() {
         //Setter antall til 0;
-        antall = 0;
+        //antall = 0;
 
         //Lager en current Nodevariabel
         Node current = hode;
@@ -120,13 +163,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node current = hode;
         //While-løkke for å iterere og sjekke om hode har en peker
         if (current != null) {
-            return true;
+            return false;
         }
 
 
 
         // Er listen tom returneres false.
-        return false;
+        return true;
     }
 
     @Override
