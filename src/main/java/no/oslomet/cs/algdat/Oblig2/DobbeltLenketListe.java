@@ -133,7 +133,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public int antall() {
         //Setter antall til 0;
-        //antall = 0;
+        antall = 0;
 
         //Lager en current Nodevariabel
         Node current = hode;
@@ -306,7 +306,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+
+        // Første forsøk
+        Node<T> n = hode;
+        hode = null;
+        while (n.neste != null) {
+            n.verdi = null;
+            n = n.neste;
+        }
+        n.verdi = null;
+        hale = null;
+        antall = 0;
+        endringer++;
     }
 
     @Override
