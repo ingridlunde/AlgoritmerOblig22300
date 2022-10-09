@@ -4,9 +4,7 @@ package no.oslomet.cs.algdat.Oblig2;
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -413,11 +411,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException();
+        return new DobbeltLenketListeIterator();
     }
 
     public Iterator<T> iterator(int indeks) {
-        throw new UnsupportedOperationException();
+        //skjekker om indeksen er lovlig
+        indeksKontroll(indeks,false);
+
+        //returnerer en instans av iterartorklassen
+        return new DobbeltLenketListeIterator(indeks);
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T> {
@@ -432,7 +434,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks) {
-            throw new UnsupportedOperationException();
+            denne = finnNode(indeks); //starter på den noden tilhørende indeksen
+            fjernOK = false;  // blir sann når next() kalles
+            iteratorendringer = endringer;  // teller endringer
         }
 
         @Override
@@ -442,7 +446,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next() {
-            throw new UnsupportedOperationException();
+            //sjekker om iteratorendringer er lik endringer. Hvis ikke, kastes en ConcurrentModificationException.
+            if (iteratorendringer != endringer){
+                throw new ConcurrentModificationException("Iteratorendringer er ikke lik endringer!");
+            }
+
+            //en NoSuchElementException hvis det ikke er flere igjen i listen altså ingen neste med if løkke
+            if (hasNext() != true){
+                throw new NoSuchElementException("Det er ikke flere noder igjen i listen!");
+            }
+
+            //setter fjernOK til true
+            fjernOK = true;
+
+            // henter verdien til noden som et objekt av T
+            T denneVerdien = denne.verdi;
+            //peker på neste node i listen
+            denne = denne.neste;
+            //returnerer verdien til noden
+            return denneVerdien;
         }
 
         @Override
