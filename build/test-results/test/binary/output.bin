@@ -1,0 +1,14 @@
+(Oppgave 10b: Ikke unntak for tom liste!
+4Oppgave 5b: Kaster feil type unntak for indeksfeil!
+7Oppgave 5d: Metoden leggInn() kaster feil type unntak!
+:Oppgave 5f: Det kastes feil type unntak for null-verdier!
+DOppgave 5g: Feil i indekssjekken! 0 <= indeks <= antall er tillatt!
+.Oppgave 6b: Indekssjekken kaster feil unntak!
+"Oppgave 6c: Indeks 7 finnes ikke!
+#Oppgave 6e: Indeks -1 finnes ikke!
+6Oppgave 6ga: Feil returverdi i metoden fjern(indeks)!
+:Oppgave 6gb: Feil i antall-oppdateringen i fjern(indeks)!
+>             Reduseres ikke antall? Reduserers den to ganger!
+9Oppgave 6h: Feil i antall-oppdateringen i fjern(indeks)!
+
+)Oppgave 8b: Det kastes feil type unntak!
