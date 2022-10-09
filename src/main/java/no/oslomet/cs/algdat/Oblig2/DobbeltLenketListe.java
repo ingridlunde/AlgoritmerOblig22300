@@ -271,25 +271,62 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T fjern(int indeks) {
+        //https://www.geeksforgeeks.org/delete-a-node-in-a-doubly-linked-list/
+        //https://www.geeksforgeeks.org/delete-doubly-linked-list-node-given-position/
+
+
+        //private Node(T verdi) {this(verdi, null, null);
         //Fjerne og returnere verdien på posisjon indeks.
 
-        //Den første verdien fjernes (indeks = 0)
+        //Setter hodenode til current for å bruke for-løkke til å finne riktig verdi.
+        Node <T> current = hode;
+        T verdi;
 
-        //Den siste verdien fjernes ( indeks = ? ) == hale.
+
+        //Bruker en for-løkke for å traversere frem til indeksen som skal fjernes.
+        int i = 0;
+        for (; i == indeks; i++ ) {
+            current = current.neste;
+        }
+
+        //Hode fjernes
+        //Hvis hode er noden som skal slettes. Flytter hodepeker og hode forsvinner.
+        if (hode == current) {
+            hode = current.neste;
+
+        }
 
         //En verdi mellom hode og hale fjernes.
+        //Sjekker om den som skal slettes ikke er siste node. Blir det riktig, eller skal det være hale her?
+        if (current.neste != null) {
+            //flytter pekerene fra current.neste til current.neste.forrige. Da vil noden bli fjernet siden den ikke har pekere på seg.
+            current.neste.forrige = current.neste;
 
-        //Verdien antall skal endres
+        }
 
-        //Tom liste etter fjerning
+        //Fjerner tilbakepekerene
+        if (current.forrige != null) {
+            //merk forrige.neste her mot neste.forrige ovenfor.
+            current.forrige.neste = current.neste;
+        }
 
-        //Verdiene endringer skal endres
+        //slett current som er lik indeks.
+
+
+        //sjekker om det er en tom liste etter fjerning.
+        if (current == null) {
+            return null;
+        }
 
         //Verdien på posisjon indeks.
-        int verdi = 0;
+        verdi = current.verdi;
 
         //Returnere verdien på posisjon
-        return null;
+        //Tar en mindre antall for den som blir fjernet og pluss på endringer.
+        antall --;
+        endringer ++;
+
+        return verdi;
     }
 
     @Override
