@@ -10,11 +10,6 @@ import java.util.Iterator;
 
 public class DobbeltLenketListe<T> implements Liste<T> {
 
-    public static void main (String [] args) {
-        String[] s = {"Ole", null, "Per", "Kari", null};
-        Liste<String> liste1 = new DobbeltLenketListe<>(s);
-        System.out.println(liste1.antall() + " " + liste1.tom());  
-    }
     /**
      * Node class
      *
@@ -49,6 +44,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
+        //https://www.softwaretestinghelp.com/doubly-linked-list-in-java/
+        //https://study.com/academy/lesson/doubly-linked-lists-in-java-creation-nodes.html
         //Lager en if setning som kaster en nullpointexception hvis listen er tom
         if (a == null) {
             throw new NullPointerException("Tabell a er null!");
@@ -58,7 +55,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //være null. Må derfor traversere gjennon med en for-løkke.
         if (a.length > 0) {
             //int i er satt utenfor for løkken fordi vi bruker break når hode er inistiert.
-            // Men vi vil vite hvilken index den er på (det kan være flere null i arrayet før vi får en verdi).
+            // Vi vil vite hvilken index den er på (det kan være flere null i arrayet før vi får en verdi).
             int i = 0;
             for (; i < a.length; i++) {
                 if (a[i] != null) {
@@ -71,9 +68,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 // hale og hode peker på samme.
                 hale = hode; 
 
-                //Traverserer deretter gjennom resten av arrayet og går bare inn i if-setningen når hale ikke er null.
+                //Traverserer gjennom resten av arrayet og går bare inn i if-setningen når hale ikke er lik null.
                 if (hale != null) {
-                    // Legger til i for å komme på indeks 1 i arrayet.
+                    // Legger til i for å komme på indeks +1 i arrayet.
                     i ++;
                     //Looper gjennom resten av arrayet for å legge det i listen
                     for (; i < a.length; i++) {
@@ -88,13 +85,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                             hale = hale.neste;
 
                         }
-
                     }
-
-
                 }
             }
-            
         }
 
     public Liste<T> subliste(int fra, int til) {
@@ -131,6 +124,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
+        //https://www.geeksforgeeks.org/program-find-size-doubly-linked-list/
         //Setter antall til 0;
         //antall = 0;
 
@@ -158,12 +152,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Sjekke om listen som kommer inn er tom
         Node current = hode;
         //While-løkke for å iterere og sjekke om hode har en peker
-        if (current != null) {
-            return false;
-        }
-
-
-
+            if (current != null) {
+                return false;
+            }
         // Er listen tom returneres false.
         return true;
     }
@@ -280,7 +271,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T fjern(int indeks) {
-        throw new UnsupportedOperationException();
+        //Fjerne og returnere verdien på posisjon indeks.
+
+        //Den første verdien fjernes (indeks = 0)
+
+        //Den siste verdien fjernes ( indeks = ? ) == hale.
+
+        //En verdi mellom hode og hale fjernes.
+
+        //Verdien antall skal endres
+
+        //Tom liste etter fjerning
+
+        //Verdiene endringer skal endres
+
+        //Verdien på posisjon indeks.
+        int verdi = 0;
+
+        //Returnere verdien på posisjon
+        return null;
     }
 
     @Override

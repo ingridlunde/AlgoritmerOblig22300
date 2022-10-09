@@ -1,0 +1,10 @@
+(Oppgave 10b: Ikke unntak for tom liste!
+4Oppgave 5b: Kaster feil type unntak for indeksfeil!
+7Oppgave 5d: Metoden leggInn() kaster feil type unntak!
+:Oppgave 5f: Det kastes feil type unntak for null-verdier!
+DOppgave 5g: Feil i indekssjekken! 0 <= indeks <= antall er tillatt!
+.Oppgave 6b: Indekssjekken kaster feil unntak!
+/Oppgave 6d: Indekssjekken kaster feil unntak!!
+/Oppgave 6f: Indekssjekken kaster feil unntak!!
+
+)Oppgave 8b: Det kastes feil type unntak!
