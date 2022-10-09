@@ -287,7 +287,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException();
+        //https://www.educative.io/m/delete-node-with-given-key
+        //Inistierer hode for å starte til venstre. Lager en previous node for å hele tiden lagre den forrige pekeren.
+        Node <T> current = hode;
+        Node <T> prev = null;
+
+        while (current != null) {
+
+            //Går inn i if-setningen hvis verdiene er like. Da har vi funnet elemente vi skal fjerne.
+            if (current.verdi == verdi) {
+                if (current == hode) {
+                    hode = hode.neste;
+
+
+                } else {
+                    //Flytter current pekeren til neste. Flytter previous peker til
+                    //Mener egentlig motsatt men får syntaksfeil
+                    current = current.neste;
+                    prev.neste = current.forrige;
+                }
+                antall --;
+                endringer ++;
+                return true;
+            }
+        }
+        //Tallet er ikke null, men finner ikke verdien. Returnerer da false;
+        return false;
     }
 
     @Override
@@ -295,19 +320,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //https://www.geeksforgeeks.org/delete-a-node-in-a-doubly-linked-list/
         //https://www.geeksforgeeks.org/delete-doubly-linked-list-node-given-position/
 
-
-        //private Node(T verdi) {this(verdi, null, null);
         //Fjerne og returnere verdien på posisjon indeks.
 
         //Setter hodenode til current for å bruke for-løkke til å finne riktig verdi.
         Node <T> current = hode;
         T verdi;
 
+        //Hvordan løse denne? Hvordan passe på at antall er riktig uten å bruke en annen metode.
+        if (indeks > antall ) {
+            throw new IndexOutOfBoundsException("Indeksen du ser etter er utenfor listen");
+        }
+
+        //Kan slå disse sammen, må bare sjekke litt opp først.
+        if (indeks < 0 ) {
+            throw new IndexOutOfBoundsException("Indeksen kan ikke være et negativt tall");
+        }
+
+        if (current == null) {
+            throw new IndexOutOfBoundsException("Listen er tom");
+        }
 
         //Bruker en for-løkke for å traversere frem til indeksen som skal fjernes.
         int i = 0;
         for (; i == indeks; i++ ) {
             current = current.neste;
+
+
         }
 
         //Hode fjernes
@@ -316,7 +354,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hode = current.neste;
 
         }
-
         //En verdi mellom hode og hale fjernes.
         //Sjekker om den som skal slettes ikke er siste node. Blir det riktig, eller skal det være hale her?
         if (current.neste != null) {
@@ -324,20 +361,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             current.neste.forrige = current.neste;
 
         }
-
         //Fjerner tilbakepekerene
         if (current.forrige != null) {
             //merk forrige.neste her mot neste.forrige ovenfor.
             current.forrige.neste = current.neste;
         }
 
-        //slett current som er lik indeks.
-
-
         //sjekker om det er en tom liste etter fjerning.
         if (current == null) {
             return null;
         }
+
 
         //Verdien på posisjon indeks.
         verdi = current.verdi;
