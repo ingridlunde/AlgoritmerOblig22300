@@ -6,6 +6,7 @@ package no.oslomet.cs.algdat.Oblig2;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Objects;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -170,7 +171,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+
+        // Må sjekke at verdi ikke er null
+        Objects.requireNonNull(verdi,"Verdi kan ikke være null");
+
+        // Hvis listen er tom
+        if (hode == null) {
+            hode = new Node<>(verdi);
+            hale = hode;
+            endringer++;
+            antall++;
+            return true;
+        }
+        // Hvis listen ikke er tom
+        else {
+            hale.neste = new Node<>(verdi, hale, null);
+            hale = hale.neste;
+            endringer++;
+            antall++;
+            return true;
+        }
     }
 
     @Override
@@ -290,11 +311,46 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+
+
+        Node<T> n = hode;
+        StringBuilder ut = new StringBuilder();
+        ut.append("[");
+
+        // Sjekker om listen er tom, om ikke så legges n.verdi til i ut.
+        if (n == null) return "[]";
+        else ut.append(n.verdi);
+
+        // Legger til n.neste.verdi så lenge n.neste ikke er null
+        while (n.neste != null) {
+            ut.append(", ");
+            ut.append(n.neste.verdi);
+            n = n.neste;
+        }
+        ut.append("]");
+
+        return ut.toString();
     }
 
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        Node<T> n = hale;
+
+        StringBuilder ut = new StringBuilder();
+        ut.append("[");
+
+        if (n == null) return "[]";
+        else ut.append(n.verdi);
+
+        while (n.forrige != null) {
+            ut.append(", ");
+            ut.append(n.forrige.verdi);
+            n = n.forrige;
+        }
+        ut.append("]");
+
+        return ut.toString();
     }
 
     @Override
