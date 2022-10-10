@@ -4,9 +4,7 @@ package no.oslomet.cs.algdat.Oblig2;
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -447,11 +445,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException();
+        return new DobbeltLenketListeIterator();
     }
 
     public Iterator<T> iterator(int indeks) {
-        throw new UnsupportedOperationException();
+        //skjekker om indeksen er lovlig
+        indeksKontroll(indeks,false);
+
+        //returnerer en instans av iterartorklassen
+        return new DobbeltLenketListeIterator(indeks);
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T> {
@@ -466,7 +468,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks) {
-            throw new UnsupportedOperationException();
+            denne = finnNode(indeks); //starter på den noden tilhørende indeksen
+            fjernOK = false;  // blir sann når next() kalles
+            iteratorendringer = endringer;  // teller endringer
         }
 
         @Override
@@ -476,12 +480,78 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next() {
-            throw new UnsupportedOperationException();
+            //sjekker om iteratorendringer er lik endringer. Hvis ikke, kastes en ConcurrentModificationException.
+            if (iteratorendringer != endringer){
+                throw new ConcurrentModificationException("Iteratorendringer er ikke lik endringer!");
+            }
+
+            //en NoSuchElementException hvis det ikke er flere igjen i listen altså ingen neste med if løkke
+            if (hasNext() != true){
+                throw new NoSuchElementException("Det er ikke flere noder igjen i listen!");
+            }
+
+            //setter fjernOK til true
+            fjernOK = true;
+
+            // henter verdien til noden som et objekt av T
+            T denneVerdien = denne.verdi;
+            //peker på neste node i listen
+            denne = denne.neste;
+            //returnerer verdien til noden
+            return denneVerdien;
         }
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException();
+
+            Node <T> currentp;
+
+
+            if (!fjernOK) {
+                throw new IllegalStateException();
+            }
+            if (iteratorendringer != endringer) {
+                throw new ConcurrentModificationException();
+            }
+
+            int teller =antall;
+            fjernOK=false; // SLik setning 2, avsnitt 2 sier, hvis disse to testene over passeres, sett fjernOK=false
+
+
+            if (teller== 1) { //Punkt 1: ser til at listen er over 1 element, hvis den generiske listen har 1 element, så vil hale og hode være null, ettersom vi fjerner da den siste noden i den generiske listen
+                hale=null;
+                hode=null;
+            }
+
+            //Trolig feil et av de 3 punktene nederst
+
+
+            else if (denne== null) { // Punkt 2: Hvis første element fjernes
+                hale=hale.forrige; // eller hale=hale.forrige
+                hale.neste=null;
+
+                //Kanskje ha en retur eller Break i hver eneste if setning
+                //Hvis ikke så trenger du else if
+            }
+
+            else if (denne.forrige == hode) {
+                hode=hode.neste; //Punkt 3: Hvis lista sin forrige er hode, så sett hodet til denne (elementet som fjernes) sin neste
+                hode.forrige= null;
+            }
+
+
+
+            else { //Punkt 4: Der begge pekeree i hver ende må oppdateres
+                currentp= denne.forrige; //Dette er noden som blir removed, i metoden
+                currentp.forrige.neste= currentp.neste;
+                currentp.neste.forrige= currentp.forrige;
+
+
+            }
+
+            antall-=1;
+            endringer+=1;
+            iteratorendringer+=1;
         }
 
     } // class DobbeltLenketListeIterator
