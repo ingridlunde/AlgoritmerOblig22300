@@ -28,6 +28,11 @@ Magnus har tatt hovedansvar for oppgave 2 og 7.
 
 # Oppgavebeskrivelse
 
-I oppgave 1 så gikk vi frem ved å ...
+I oppgave 1 så gikk vi frem ved å sette antallet til 0. Deretter laget jeg en Node current som ble satt til hode.
+Dette var for å begynne fra venstre og telle hvor lang den linkede listen var. Den gikk gjennom alle nodene som 
+var forskjellig fra null og plusset 1 på antallet for hver gang den gikk inn i while-løkka. Når den gikk inn i lista
+flyttet jeg current-pekeren fra current til current sin neste. 
 
 I oppgave 2 så brukte vi en ... til å ...
+
+I oppgave
