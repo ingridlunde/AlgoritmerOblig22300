@@ -10,6 +10,7 @@ class Oblig2Test {
     @org.junit.jupiter.api.Test
     void oppgave1() {
 
+
         int antallFeil = 0;
         Liste<Integer> liste = new DobbeltLenketListe<>();
 

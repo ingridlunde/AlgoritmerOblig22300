@@ -15,6 +15,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
      * @param <T>
      */
     private static final class Node<T> {
+
+        public void main(String[] args) {
+            String[] s = {"Ole", null, "Per", "Kari", null};
+            Liste<String> liste = new DobbeltLenketListe<>(s);
+
+        }
         private T verdi;                   // nodens verdi
         private Node<T> forrige, neste;    // pekere
 
@@ -318,33 +324,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //https://www.geeksforgeeks.org/delete-a-node-in-a-doubly-linked-list/
         //https://www.geeksforgeeks.org/delete-doubly-linked-list-node-given-position/
 
-        //Fjerne og returnere verdien på posisjon indeks.
+        //Sjekker om indeks som kommer inn er gyldig
+        indeksKontroll(indeks,false);
+
 
         //Setter hodenode til current for å bruke for-løkke til å finne riktig verdi.
         Node <T> current = hode;
-        T verdi;
+        T verdi = null;
 
-        //Hvordan løse denne? Hvordan passe på at antall er riktig uten å bruke en annen metode.
-        if (indeks > antall ) {
-            throw new IndexOutOfBoundsException("Indeksen du ser etter er utenfor listen");
-        }
-
-        //Kan slå disse sammen, må bare sjekke litt opp først.
-        if (indeks < 0 ) {
-            throw new IndexOutOfBoundsException("Indeksen kan ikke være et negativt tall");
-        }
-
-        if (current == null) {
-            throw new IndexOutOfBoundsException("Listen er tom");
+        //Listen har et element.
+        if (indeks == 0 ) {
+            hode = hode.neste;
         }
 
         //Bruker en for-løkke for å traversere frem til indeksen som skal fjernes.
         int i = 0;
-        for (; i == indeks; i++ ) {
+        for (; i < indeks; i++ ) {
             current = current.neste;
-
-
         }
+
 
         //Hode fjernes
         //Hvis hode er noden som skal slettes. Flytter hodepeker og hode forsvinner.
@@ -355,6 +353,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //En verdi mellom hode og hale fjernes.
         //Sjekker om den som skal slettes ikke er siste node. Blir det riktig, eller skal det være hale her?
         if (current.neste != null) {
+            verdi = current.verdi;
             //flytter pekerene fra current.neste til current.neste.forrige. Da vil noden bli fjernet siden den ikke har pekere på seg.
             current.neste.forrige = current.neste;
 
@@ -369,11 +368,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (current == null) {
             return null;
         }
-
-
-        //Verdien på posisjon indeks.
-        verdi = current.verdi;
-
+        
         //Returnere verdien på posisjon
         //Tar en mindre antall for den som blir fjernet og pluss på endringer.
         antall --;
