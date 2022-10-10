@@ -512,9 +512,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 currentp.forrige.neste= currentp.neste;
                 currentp.neste.forrige= currentp.forrige;
 
-               /*
-                denne.forrige=denne.forrige.forrige;
-                denne.forrige.neste=denne; */
+
             }
 
             antall-=1;
