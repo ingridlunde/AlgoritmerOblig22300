@@ -469,7 +469,57 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException();
+
+            Node <T> currentp;
+
+
+            if (!fjernOK) {
+                throw new IllegalStateException();
+            }
+            if (iteratorendringer != endringer) {
+                throw new ConcurrentModificationException();
+            }
+
+            int teller =antall;
+            fjernOK=false; // SLik setning 2, avsnitt 2 sier, hvis disse to testene over passeres, sett fjernOK=false
+
+
+            if (teller== 1) { //Punkt 1: ser til at listen er over 1 element, hvis den generiske listen har 1 element, så vil hale og hode være null, ettersom vi fjerner da den siste noden i den generiske listen
+                hale=null;
+                hode=null;
+            }
+
+            //Trolig feil et av de 3 punktene nederst
+
+
+            else if (denne== null) { // Punkt 2: Hvis første element fjernes
+                hale=hale.forrige; // eller hale=hale.forrige
+                hale.neste=null;
+
+                //Kanskje ha en retur eller Break i hver eneste if setning
+                //Hvis ikke så trenger du else if
+            }
+
+            else if (denne.forrige == hode) {
+                hode=hode.neste; //Punkt 3: Hvis lista sin forrige er hode, så sett hodet til denne (elementet som fjernes) sin neste
+                hode.forrige= null;
+            }
+
+
+
+            else { //Punkt 4: Der begge pekeree i hver ende må oppdateres
+                currentp= denne.forrige; //Dette er noden som blir removed, i metoden
+                currentp.forrige.neste= currentp.neste;
+                currentp.neste.forrige= currentp.forrige;
+
+               /*
+                denne.forrige=denne.forrige.forrige;
+                denne.forrige.neste=denne; */
+            }
+
+            antall-=1;
+            endringer+=1;
+            iteratorendringer+=1;
         }
 
     } // class DobbeltLenketListeIterator
