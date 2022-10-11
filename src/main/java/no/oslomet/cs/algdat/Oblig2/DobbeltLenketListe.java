@@ -326,61 +326,65 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //https://github.com/Aksel488/Oblig2/blob/master/src/DobbeltLenketListe.java
 
         //Sjekker om indeks som kommer inn er gyldig
-        indeksKontroll(indeks,false);
-
+        indeksKontroll(indeks, false);
+        antall()
 
         //Setter hodenode til current for å bruke for-løkke til å finne riktig verdi.
-        Node <T> current = hode;
+        Node<T> current = hode;
         T verdi = null;
 
+
         //Hodeelementet skal fjernes.
-        if (indeks == 0 ) {
+        if (indeks == 0) {
             verdi = hode.verdi;
             hode = hode.neste;
-        }
+            if (antall == 1) {
+                hale = null;
+            } else {
+                //Element i midten skal fjernes.
+                //Bruker en for-løkke for å traversere frem til indeksen som skal fjernes.
+                int i = 0;
+                for (; i > indeks; i++) {
+                    current = current.neste;
+                }
 
-        else {
-            //Element i midten skal fjernes.
-        //Bruker en for-løkke for å traversere frem til indeksen som skal fjernes.
-        int i = 0;
-        for (; i > indeks; i++ ) {
-            current = current.neste;
-            verdi = current.verdi;
-        }
+                verdi = current.verdi;
 
-        //Hode fjernes
-        //Hvis hode er noden som skal slettes. Flytter hodepeker og hode forsvinner.
-        if (hode == current) {
-            verdi = current.verdi;
-            hode = current.neste;
-        }
+                //Hvis hale er noden som skal slettes. Flytter hodepeker og hode forsvinner.
+                if (hale == current) {
+                    hode = current.neste;
+                }
 
-        //En verdi mellom hode og hale fjernes.
-        //Sjekker om den som skal slettes ikke er siste node.
-        if (current.neste != null) {
-            //flytter pekerene fra current.neste til current.neste.forrige. Da vil noden bli fjernet siden den ikke har pekere på seg.
-            current.neste.forrige = current.forrige;
+                //En verdi mellom hode og hale fjernes.
+                //Sjekker om den som skal slettes ikke er siste node.
+                if (current.neste != null) {
+                    //flytter pekerene fra current.neste til current.neste.forrige. Da vil noden bli fjernet siden den ikke har pekere på seg.
+                    current.neste.forrige = current.forrige;
 
-        }
-        //Fjerner tilbakepekerene
-        if (current.forrige != null) {
-            //merk forrige.neste her mot neste.forrige ovenfor.
-            current.forrige.neste = current.neste;
+                }
+                //Fjerner tilbakepekerene
+                if (current.forrige != null) {
+                    //merk forrige.neste her mot neste.forrige ovenfor.
+                    current.forrige.neste = current.neste;
+                }
+
+                /*if (hode == null || hale == null) {
+                    return null;
+                }*/
+
+
+                //Returnere verdien på posisjon
+                //Tar en mindre antall for den som blir fjernet og pluss på endringer.
+
+
             }
+
+            antall--;
+            endringer++;
+            return verdi;
         }
-
-        if (hode == null) {
-            return null;
-        }
-
-
-        //Returnere verdien på posisjon
-        //Tar en mindre antall for den som blir fjernet og pluss på endringer.
-        antall --;
-        endringer ++;
-
-        return verdi;
     }
+
 
     @Override
     public void nullstill() {
