@@ -323,6 +323,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public T fjern(int indeks) {
         //https://www.geeksforgeeks.org/delete-a-node-in-a-doubly-linked-list/
         //https://www.geeksforgeeks.org/delete-doubly-linked-list-node-given-position/
+        //https://github.com/Aksel488/Oblig2/blob/master/src/DobbeltLenketListe.java
 
         //Sjekker om indeks som kommer inn er gyldig
         indeksKontroll(indeks,false);
@@ -332,43 +333,47 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node <T> current = hode;
         T verdi = null;
 
-        //Listen har et element.
+        //Hodeelementet skal fjernes.
         if (indeks == 0 ) {
+            verdi = hode.verdi;
             hode = hode.neste;
         }
 
+        else {
+            //Element i midten skal fjernes.
         //Bruker en for-løkke for å traversere frem til indeksen som skal fjernes.
         int i = 0;
-        for (; i < indeks; i++ ) {
+        for (; i > indeks; i++ ) {
             current = current.neste;
+            verdi = current.verdi;
         }
-
 
         //Hode fjernes
         //Hvis hode er noden som skal slettes. Flytter hodepeker og hode forsvinner.
         if (hode == current) {
-            hode = current.neste;
-
-        }
-        //En verdi mellom hode og hale fjernes.
-        //Sjekker om den som skal slettes ikke er siste node. Blir det riktig, eller skal det være hale her?
-        if (current.neste != null) {
             verdi = current.verdi;
+            hode = current.neste;
+        }
+
+        //En verdi mellom hode og hale fjernes.
+        //Sjekker om den som skal slettes ikke er siste node.
+        if (current.neste != null) {
             //flytter pekerene fra current.neste til current.neste.forrige. Da vil noden bli fjernet siden den ikke har pekere på seg.
-            current.neste.forrige = current.neste;
+            current.neste.forrige = current.forrige;
 
         }
         //Fjerner tilbakepekerene
         if (current.forrige != null) {
             //merk forrige.neste her mot neste.forrige ovenfor.
             current.forrige.neste = current.neste;
+            }
         }
 
-        //sjekker om det er en tom liste etter fjerning.
-        if (current == null) {
+        if (hode == null) {
             return null;
         }
-        
+
+
         //Returnere verdien på posisjon
         //Tar en mindre antall for den som blir fjernet og pluss på endringer.
         antall --;
