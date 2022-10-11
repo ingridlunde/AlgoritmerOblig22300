@@ -267,36 +267,36 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean fjern(T verdi) {
         //https://www.educative.io/m/delete-node-with-given-key
         //Inistierer hode for å starte til venstre. Lager en previous node for å hele tiden lagre den forrige pekeren.
-        Node <T> current = hode;
+        Node <T> temp = hode;
 
-        while (current != null) {
+        while (temp != null) {
 
             //Går inn i if-setningen hvis verdiene er like. Da har vi funnet elemente vi skal fjerne.
-            if (verdi.equals(current.verdi)) {
-                if (current.neste == null && current.forrige == null) {
+            if (verdi.equals(temp.verdi)) {
+                if (temp.neste == null && temp.forrige == null) {
                     hode = hale = null;
                 }
-                else if (current.neste == null) {
+                else if (temp.neste == null) {
                     hale = hale.forrige;
                     hale.neste = null;
 
                 }
-                else if (current.forrige == null) {
+                else if (temp.forrige == null) {
                     hode = hode.neste;
                     hode.forrige = null;
                 }
                 else {
                     //Flytter current pekeren til neste. Flytter previous peker til
                     //tilbakepeker
-                    current.neste.forrige = current.forrige;
+                    temp.neste.forrige = temp.forrige;
                     //Fremoverpeker
-                    current.forrige.neste = current.neste;
+                    temp.forrige.neste = temp.neste;
                 }
                 antall --;
                 endringer ++;
                 return true;
             }
-            current = current.neste;
+            temp = temp.neste;
         }
 
         //Tallet er ikke null, men finner ikke verdien. Returnerer da false;
@@ -305,6 +305,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T fjern(int indeks) {
+        //Kompendie til Ulf Uttensrud. Programkode 3.3.3 c)
         //https://www.geeksforgeeks.org/delete-a-node-in-a-doubly-linked-list/
         //https://www.geeksforgeeks.org/delete-doubly-linked-list-node-given-position/
 
@@ -316,12 +317,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         if (indeks == 0) {
             if (temp.neste != null) {
-                //verdi = temp.verdi;
                 hode = temp.neste;
                 hode.forrige = null;
             } else {
                     hode = hale = null;
-                    //verdi = null;
             }
 
         } else {
@@ -330,7 +329,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             for (; i < indeks; i++) {
                 temp = temp.neste;
             }
-            //verdi = temp.verdi;
 
             //Hvis hale er noden som skal slettes. Flytter hodepeker og hode forsvinner.
             if (temp == hale) {
@@ -355,27 +353,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (temp == null) {
           return null;
         }
+        //Tar en mindre antall for den som blir fjernet og pluss på endringer.
 
-
-        //Verdien på posisjon indeks.
-        //verdi = current.verdi;
-
-            //Returnere verdien på posisjon
-            //Tar en mindre antall for den som blir fjernet og pluss på endringer.
-
-
-        /*if (indeks > antall ) {
-            throw new IndexOutOfBoundsException("Indeksen du ser etter er utenfor listen");
-        }
-
-        //Kan slå disse sammen, må bare sjekke litt opp først.
-        if (indeks < 0 ) {
-            throw new IndexOutOfBoundsException("Indeksen kan ikke være et negativt tall");
-        }
-
-        if (current == null) {
-            throw new IndexOutOfBoundsException("Listen er tom");
-        }*/
         antall--;
         endringer++;
         return temp.verdi;

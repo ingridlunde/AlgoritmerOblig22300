@@ -46,6 +46,24 @@ og returnerer hhv. indeksplassen til noden som er "gjennfunnet" i sammenligninge
 I oppgave 5
  
 I oppgave 6
+Laget jeg boolean fjern(T verdi). Her inistierer jeg en tempverdi som jeg bruker når jeg sjekker om et tall er i listen. 
+Bruker ulike if-setninger for å sjekke de ulike scenarioene for når temp er lik verdien. Flytter pekerne alt ettersom det er 
+hode, hale eller midt i pekere. Returnerer true hvis jeg fant verdi og fjernet. Returnerer false hvis ikke. i Fjern(indeks) setter jeg
+tempverdi til hode. Deretter sjekker jeg om ulike scenarioer om indeks er 0 eller ikke. Bruker en for-løkke for å finne riktig indeks. 
+Flytter pekerene alt etter om det er hode, hale eller midt i som fjernes. Sjekker om det er en tom liste etter fjerning. 
+Returnerer tilslutt verdien som fjernes. 
+
+Her måtte jeg først inistiere en temp Node for å ha
+lagret forrige peker. Når indeks er lik null er det hode som skal fjernes og sjekker om det er en tom liste etter det.
+Hvisår jeg inn i for løkken for å finne riktig indeks. Lagrer tallet som skal fjernes i tempvariabel. 
+Sjekker deretter om verdien som skal fjernes er halepekeren. temp er forskjellig fra null går inn i while løkke. Hvis verdi er lik verdi går den inn.
+Sjekker deretter om den er lik hode, for da flyttes bare hode.neste til hode og prev er fremdeles null. Hvis ikke
+flyttes current til current.neste og prev.neste er current sin forrige etter at current har flyttet seg.
+
+Gjern med indeks. Der setter vi current til hode og inistierer T verdi. Har if tester som sjekker ulike scenarioer.
+Bruker en for løkke for å traversere gjennom listen til riktig indeks. Pekerne flyttes bort fra noden slik at den
+fjernes. Etter at vi har funnet riktig indeks lagres
+verdi lik current.verdi og returneres. Pekerne er flyttet så noden forsvinner.
 
 I oppgave 7
 
@@ -61,5 +79,6 @@ Og at omkringliggende noder blir omdirigert til å peke til nye steder i beholde
 
 
 I oppgave 10
+
 
 
