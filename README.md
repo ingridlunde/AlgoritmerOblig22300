@@ -80,5 +80,26 @@ Og at omkringliggende noder blir omdirigert til å peke til nye steder i beholde
 
 I oppgave 10
 
+Litteraturliste
+
+Delete a Doubly Linked List node at a given position. (2017, juli 6). GeeksforGeeks. 
+https://www.geeksforgeeks.org/delete-doubly-linked-list-node-given-position/
+
+Delete a node in a Doubly Linked List. (2010, mai 8). GeeksforGeeks. 
+https://www.geeksforgeeks.org/delete-a-node-in-a-doubly-linked-list/
+
+Delete Node with a Given Key. (u.å.). Educative: Interactive Courses for Software Developers. 
+Hentet 9. oktober 2022, fra https://www.educative.io/m/delete-node-with-given-key
+
+Doubly Linked Lists in Java: Creation & Nodes. (u.å.). Study.Com. 
+Hentet 9. oktober 2022, fra https://study.com/academy/lesson/doubly-linked-lists-in-java-creation-nodes.html
+
+Program to find size of Doubly Linked List. (2018, april 20). GeeksforGeeks. 
+https://www.geeksforgeeks.org/program-find-size-doubly-linked-list/
+
+Uttersrud, U. (2021). Delkapittel 3.3  –  En lenket liste   –. 
+https://www.cs.hioa.no/~ulfu/appolonius/kap3/3/kap33.html#3.3.3
+
+
 
 
