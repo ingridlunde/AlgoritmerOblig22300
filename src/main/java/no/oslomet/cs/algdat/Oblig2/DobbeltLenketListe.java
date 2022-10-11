@@ -383,9 +383,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        //throw new UnsupportedOperationException();
 
-        // Første forsøk
+        // Første måte
         Node<T> n = hode;
         hode = null;
         while (n.neste != null) {
@@ -396,6 +395,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         hale = null;
         antall = 0;
         endringer++;
+
+        // Andre måte:
+        // for (int i = 0; i < antall;) fjern(i);
+
+        // Gj.snitt tid første måte: 0,002183 ms
+        // Gj.snitt tid andre måte: 0,007333 ms
     }
 
     @Override
