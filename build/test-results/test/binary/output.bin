@@ -1,6 +1,4 @@
 (Oppgave 10b: Ikke unntak for tom liste!
-/Oppgave 3a: Dette (1708 ms) gikk altfor sakte!
-4            Har du kodet metoden finnNode() riktig?
 4Oppgave 3ø: Skal ha IndexOutOfBoundsException her!
 =Oppgave 3å1: Det skal kastes et unntak når fra er negativ!
 4Oppgave 3å4: Skal ha IllegalArgumentException her!
@@ -8,5 +6,3 @@
 7Oppgave 5d: Metoden leggInn() kaster feil type unntak!
 :Oppgave 5f: Det kastes feil type unntak for null-verdier!
 DOppgave 5g: Feil i indekssjekken! 0 <= indeks <= antall er tillatt!
-
-)Oppgave 8b: Det kastes feil type unntak!

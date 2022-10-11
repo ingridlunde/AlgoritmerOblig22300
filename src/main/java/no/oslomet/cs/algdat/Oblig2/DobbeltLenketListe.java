@@ -46,9 +46,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //https://www.softwaretestinghelp.com/doubly-linked-list-in-java/
         //https://study.com/academy/lesson/doubly-linked-lists-in-java-creation-nodes.html
         //Lager en if setning som kaster en nullpointexception hvis listen er tom
-        if (a == null) {
-            throw new NullPointerException("Tabell a er null!");
-        }
+        Objects.requireNonNull(a, "Tabell a er tom");
 
         //Lager en if setning for å plassere hode peker. Viktig å passe på at elementene i starten av array kan
         //være null. Må derfor traversere gjennon med en for-løkke.
@@ -58,7 +56,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             int i = 0;
             for (; i < a.length; i++) {
                 if (a[i] != null) {
-                    hode = new Node(a[i]);
+                    hode = new Node<>(a[i]);
+                    antall ++;
                     break;
                 }
             }
@@ -68,7 +67,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 hale = hode; 
 
                 //Traverserer gjennom resten av arrayet og går bare inn i if-setningen når hale ikke er lik null.
-                if (hale != null) {
+                if (hode != null) {
                     // Legger til i for å komme på indeks +1 i arrayet.
                     i ++;
                     //Looper gjennom resten av arrayet for å legge det i listen
@@ -82,6 +81,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
                             //FLytter hale til hale.neste. Hale skal alltid være tilslutt. Derfor gjør vi dette.
                             hale = hale.neste;
+                            antall ++;
 
                         }
                     }
@@ -123,35 +123,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        //https://www.geeksforgeeks.org/program-find-size-doubly-linked-list/
-        //Setter antall til 0;
-        antall = 0;
-
-        //Lager en current Nodevariabel
-        Node current = hode;
-        //Legger inn en if hvis listen har null -- sender nullexception
-        if (current == null) {
-            //Sender null exception
-        }
-
-        //Bruker en while løkke for å gå gjennom dobbel lenket liste helt til pekeren peker på null.
-        while (current != null) {
-            antall ++;
-            //Flytter pekeren fra node til neste node og sjekker om vi skal inn i while-løkka igjen.
-            current = current.neste;
-        }
-         //Må finne ut hvordan jeg løser når listen er 0;
-
-        //returnerer antallet/lengden på listern
       return antall;
     }
 
     @Override
     public boolean tom() {
         //Sjekke om listen som kommer inn er tom
-        Node current = hode;
+
         //While-løkke for å iterere og sjekke om hode har en peker
-            if (current != null) {
+            if (hode != null) {
                 return false;
             }
         // Er listen tom returneres false.
@@ -288,27 +268,37 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //https://www.educative.io/m/delete-node-with-given-key
         //Inistierer hode for å starte til venstre. Lager en previous node for å hele tiden lagre den forrige pekeren.
         Node <T> current = hode;
-        Node <T> prev = null;
 
         while (current != null) {
 
             //Går inn i if-setningen hvis verdiene er like. Da har vi funnet elemente vi skal fjerne.
-            if (current.verdi == verdi) {
-                if (current == hode) {
+            if (verdi.equals(current.verdi)) {
+                if (current.neste == null && current.forrige == null) {
+                    hode = hale = null;
+                }
+                else if (current.neste == null) {
+                    hale = hale.forrige;
+                    hale.neste = null;
+
+                }
+                else if (current.forrige == null) {
                     hode = hode.neste;
-
-
-                } else {
+                    hode.forrige = null;
+                }
+                else {
                     //Flytter current pekeren til neste. Flytter previous peker til
-                    //Mener egentlig motsatt men får syntaksfeil
-                    current = current.neste;
-                    prev.neste = current.forrige;
+                    //tilbakepeker
+                    current.neste.forrige = current.forrige;
+                    //Fremoverpeker
+                    current.forrige.neste = current.neste;
                 }
                 antall --;
                 endringer ++;
                 return true;
             }
+            current = current.neste;
         }
+
         //Tallet er ikke null, men finner ikke verdien. Returnerer da false;
         return false;
     }
@@ -319,13 +309,62 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //https://www.geeksforgeeks.org/delete-doubly-linked-list-node-given-position/
 
         //Fjerne og returnere verdien på posisjon indeks.
+        indeksKontroll(indeks, false);
 
         //Setter hodenode til current for å bruke for-løkke til å finne riktig verdi.
-        Node <T> current = hode;
-        T verdi;
+        Node<T> temp = hode;
 
-        //Hvordan løse denne? Hvordan passe på at antall er riktig uten å bruke en annen metode.
-        if (indeks > antall ) {
+        if (indeks == 0) {
+            if (temp.neste != null) {
+                //verdi = temp.verdi;
+                hode = temp.neste;
+                hode.forrige = null;
+            } else {
+                    hode = hale = null;
+                    //verdi = null;
+            }
+
+        } else {
+            //Bruker en for-løkke for å traversere frem til indeksen som skal fjernes.
+            int i = 0;
+            for (; i < indeks; i++) {
+                temp = temp.neste;
+            }
+            //verdi = temp.verdi;
+
+            //Hvis hale er noden som skal slettes. Flytter hodepeker og hode forsvinner.
+            if (temp == hale) {
+                hale = temp.forrige;
+                hale.neste = null;
+            }
+
+            //En verdi mellom hode og hale fjernes.
+            //Sjekker om den som skal slettes ikke er siste node. Blir det riktig, eller skal det være hale her?
+            else {
+                // Fjerner tilbakepekeren
+                //flytter pekerene fra temp.neste til temp.neste.forrige. Da vil noden bli fjernet siden den ikke har pekere på seg.
+                temp.neste.forrige = temp.forrige;
+
+                //Fjerner fremoverpekeren
+                //merk forrige.neste her mot neste.forrige ovenfor.
+                temp.forrige.neste = temp.neste;
+            }
+        }
+
+        //sjekker om det er en tom liste etter fjerning.
+        if (temp == null) {
+          return null;
+        }
+
+
+        //Verdien på posisjon indeks.
+        //verdi = current.verdi;
+
+            //Returnere verdien på posisjon
+            //Tar en mindre antall for den som blir fjernet og pluss på endringer.
+
+
+        /*if (indeks > antall ) {
             throw new IndexOutOfBoundsException("Indeksen du ser etter er utenfor listen");
         }
 
@@ -336,50 +375,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         if (current == null) {
             throw new IndexOutOfBoundsException("Listen er tom");
-        }
-
-        //Bruker en for-løkke for å traversere frem til indeksen som skal fjernes.
-        int i = 0;
-        for (; i == indeks; i++ ) {
-            current = current.neste;
-
-
-        }
-
-        //Hode fjernes
-        //Hvis hode er noden som skal slettes. Flytter hodepeker og hode forsvinner.
-        if (hode == current) {
-            hode = current.neste;
-
-        }
-        //En verdi mellom hode og hale fjernes.
-        //Sjekker om den som skal slettes ikke er siste node. Blir det riktig, eller skal det være hale her?
-        if (current.neste != null) {
-            //flytter pekerene fra current.neste til current.neste.forrige. Da vil noden bli fjernet siden den ikke har pekere på seg.
-            current.neste.forrige = current.neste;
-
-        }
-        //Fjerner tilbakepekerene
-        if (current.forrige != null) {
-            //merk forrige.neste her mot neste.forrige ovenfor.
-            current.forrige.neste = current.neste;
-        }
-
-        //sjekker om det er en tom liste etter fjerning.
-        if (current == null) {
-            return null;
-        }
-
-
-        //Verdien på posisjon indeks.
-        verdi = current.verdi;
-
-        //Returnere verdien på posisjon
-        //Tar en mindre antall for den som blir fjernet og pluss på endringer.
-        antall --;
-        endringer ++;
-
-        return verdi;
+        }*/
+        antall--;
+        endringer++;
+        return temp.verdi;
     }
 
     @Override
