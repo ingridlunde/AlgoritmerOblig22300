@@ -91,7 +91,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public Liste<T> subliste(int fra, int til) {
         //skjekker om fra og til er lovlige argumenter og er innenfor listen sin lengde ved fratilKontroll metoden
-        //fratilKontroll(antall, fra,til);
+        fratilKontroll(antall, fra,til);
 
         //Henter hode og legger det inn i en objekt av Node<T>
         Node<T> noden = hode;
@@ -120,6 +120,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         return subliste;
     }
+
+    //Hjelpemetode
+    private void fratilKontroll(int antall, int fra, int til) {
+        if (fra < 0) {                                // fra er negativ
+            throw new IndexOutOfBoundsException("fra(" + fra + ") er negativ!");
+        }
+        if (til > antall) {                        // til er utenfor tabellen
+            throw new IndexOutOfBoundsException("til(" + til + ") > antall(" + antall + ")");
+        }
+        if (fra > til) {                               // fra er større enn til
+            throw new IllegalArgumentException("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+        }
+    }
+
 
     @Override
     public int antall() {
