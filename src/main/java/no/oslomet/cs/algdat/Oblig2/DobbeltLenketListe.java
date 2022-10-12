@@ -183,9 +183,36 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
     }
 
+    /////Oppg5//////
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
+
+        /*Node<T> P;
+        Node<T> q;
+        Node<T> r;*/
+
+        Objects.requireNonNull(verdi,"Ikke lov med null verdier");
+
+        indeksKontroll(indeks, true);
+
+        if (indeks == 0) {                       //Verdi legges først
+            hode = new Node<>(verdi);
+            if (antall == 0) {
+                hale = hode;
+            } else if (indeks == antall) {       //Verdi skal legges bakerst.
+                hale = hale.neste = new Node<>(verdi);
+                hale.neste = null;
+            } /*else {
+                Node<T> p = hode;
+                for (int i = 0; i < indeks; i++) {
+                    p = p.neste;
+                    p.neste = new Node<>(verdi);
+                }                               //p flyttes til indeks-1
+
+            }*/
+
+            antall++;
+        }
     }
 
 
@@ -557,9 +584,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        throw new UnsupportedOperationException();
+
+        /*DobbeltLenketListe usortert = new liste;
+        Collections.sort(usortert);*/
+
+
     }
-    }
+}
     // class DobbeltLenketListe
 
 
