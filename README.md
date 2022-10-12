@@ -135,6 +135,12 @@ https://www.geeksforgeeks.org/program-find-size-doubly-linked-list/
 Uttersrud, U. (2021). Delkapittel 3.3  –  En lenket liste   –. 
 https://www.cs.hioa.no/~ulfu/appolonius/kap3/3/kap33.html#3.3.3
 
+Implementing a Linked List in Java using Class. (2022, september 01). GeeksforGeeks.
+https://www.geeksforgeeks.org/implementing-a-linked-list-in-java-using-class/
+
+Write a function to get Nth node in a Linked List. (2022, august 01). GeeksforGeeks.
+https://www.geeksforgeeks.org/write-a-function-to-get-nth-node-in-a-linked-list/
+
 
 
 

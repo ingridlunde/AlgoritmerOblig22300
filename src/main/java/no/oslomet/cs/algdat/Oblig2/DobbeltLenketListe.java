@@ -477,6 +477,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next() {
+            //https://www.geeksforgeeks.org/implementing-a-linked-list-in-java-using-class/
             //sjekker om iteratorendringer er lik endringer. Hvis ikke, kastes en ConcurrentModificationException.
             if (iteratorendringer != endringer){
                 throw new ConcurrentModificationException("Iteratorendringer er ikke lik endringer!");
