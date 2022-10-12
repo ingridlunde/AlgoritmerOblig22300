@@ -41,7 +41,20 @@ Løkken vil stoppe når n.forrige == null.
 b) Metoden leggInn(T verdi) begynner med en sjekk av at verdi ikke er null. Deretter sjekkes om listen er tom. Om den er tom så legges en ny node med verdi inn i listen, og hode- og halepekerne peker mot denne. Til slutt økes variabelen endringer og antall og true returneres.
 Om listen ikke er tom legges ny node med verdi inn etter hale. Deretter settes halepekeren til å peke mot ny node. Endringer og antall økes og true returneres.
 
-I oppgave 3
+I oppgave 3:
+a)
+Her starter jeg med å lage en metoden finnNode hvor den skal returnerer noden med den gitte indeksen.
+Den starter med å finne ut med en if setning om indeksen er mindre ennn antall/2 og vis den er. 
+Dermed starte fra hode og gå mot høyre. hvis ikke else  starter letingen fra halen og går mot venstre.
+Begge scenarioene går videre til å bruke while løkke for å ta i bruk neste/forrige pekere avhengig om hvor den starter fra.
+Til den er på noden tilsvarende indeksen. While løkke brukes siden løkken kjøres ukjent mange ganger.
+Deretter lager metoden T hent(int indeks) hvor jeg foretar indekskontroll. og vis det ikke gis feilmeldinger går den videre
+til hente noden til indeksen med finnNode metoden og deretter returnere verdien til noden.
+b)
+Deretter lager metoden subliste som først skjekker om det er lovlige argumenter i input.
+Deretter henter hoden. Deretter med en forløkke flytter noden til fra indeksen med neste pekere her for løkke siden vi vet hvor mange løkken skal kjøres.
+Deretter oppretter liste av T[] der nodene lagres.
+og til slutt skriver ut verdiene til nodene med forløkke  inn i en ny subliste som returneres.
 
 I oppgave 4:
 Her så har jeg begynt med å lage en hjelpevariablen kalt "peker" som iterer seg gjennom beholderen vår fra og med hodet, 
@@ -79,7 +92,17 @@ Til slutt tok jeg 10 målinger av hver metode og fikk gjennomsnittet:
 2. måte: 0,007333 ms
 Dette viser at til tross for at 2. måte var en mye enklere kode var den mye treigere enn 1. måte.
 
-I oppgave 8
+I oppgave 8:
+a)
+lager metoden T next() og med en enkel if test som sammenligner iteratorendringer og endringer og skriver ut en feilmelding
+Deretter med en if setning vis det ikke er flere igjen skrive ut en annen feilmelding.
+Derettter settes fjernOK til true som oppaven ber om og returnerer verdien til denne og flyttes til neste node
+b)
+metoden returnerer en instans av iteratorklassen
+c)
+Samme konstruktør som den ferdig koden bare setter denne til Noden tilsvarende indeksen.
+d)
+lager til slutt metoden Iterator<T> iterator(int indeks) skjekker først om det er lovlig indeks med indekskontroll og deretter returnerer en instans av iteratorklassen.
 
 
 I oppgave 9
