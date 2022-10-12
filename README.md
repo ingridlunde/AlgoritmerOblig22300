@@ -33,7 +33,13 @@ Dette var for å begynne fra venstre og telle hvor lang den linkede listen var. 
 var forskjellig fra null og plusset 1 på antallet for hver gang den gikk inn i while-løkka. Når den gikk inn i lista
 flyttet jeg current-pekeren fra current til current sin neste. 
 
-I oppgave 2 så brukte vi en ... til å ...
+I oppgave 2:
+a) Metoden toString() begynner med å deklarere en node "n" = hode og en StringBuilder "ut". Om n er null vil metoden returnere "[]".
+Om ikke vil den legge til n.verdi i "ut" og bruke en while-løkke til å legge til alle verdier av n i "ut". Løkken stopper når n.neste == null.
+For metoden omvendtString() fungerer på samme måte som toString(), bortsett fra at noden n = hale, og at den jobber seg bakover fra siste node.
+Løkken vil stoppe når n.forrige == null.
+b) Metoden leggInn(T verdi) begynner med en sjekk av at verdi ikke er null. Deretter sjekkes om listen er tom. Om den er tom så legges en ny node med verdi inn i listen, og hode- og halepekerne peker mot denne. Til slutt økes variabelen endringer og antall og true returneres.
+Om listen ikke er tom legges ny node med verdi inn etter hale. Deretter settes halepekeren til å peke mot ny node. Endringer og antall økes og true returneres.
 
 I oppgave 3
 
@@ -65,7 +71,13 @@ Bruker en for løkke for å traversere gjennom listen til riktig indeks. Pekerne
 fjernes. Etter at vi har funnet riktig indeks lagres
 verdi lik current.verdi og returneres. Pekerne er flyttet så noden forsvinner.
 
-I oppgave 7
+I oppgave 7:
+Her synes jeg det var lettest å gjøre det på 1. måte, ved å starte i hode og gå mot hale. Først settes hode til null, deretter bruker jeg en while-løkke til å gå gjennom listen og nulle ut hver verdi. Løkka stopper når n.neste == null. Til slutt settes hale-pekeren til null, "antall" nullstilles og "endringer" økes.
+2. måte brukte jeg litt tid på å finne ut av, men fant til slutt ut en måte som var veldig enkel. I starten hadde jeg problem med at antall ble mindre og mindre for hver iterasjon, siden fjern(i) også trekker fra antall. Derfor gikk jeg for en for-løkke der int i = 0 hele tiden, dermed fjerner den første node for hver iterasjon, samtidig som antall også blir mindre for hver iterasjon.
+Til slutt tok jeg 10 målinger av hver metode og fikk gjennomsnittet:
+1. måte: 0,002183 ms
+2. måte: 0,007333 ms
+Dette viser at til tross for at 2. måte var en mye enklere kode var den mye treigere enn 1. måte.
 
 I oppgave 8
 
