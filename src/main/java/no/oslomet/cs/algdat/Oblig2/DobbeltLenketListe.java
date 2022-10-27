@@ -588,9 +588,39 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        throw new UnsupportedOperationException();
+        if (liste.tom()) throw new NoSuchElementException("ingen noder i listen");
+
+        // Iterator<T> lis = liste.iterator();
+        //T maksverdi = lis.next();
+        int plass = 0;
+        for (T verdi : liste) {
+            System.out.println(verdi);
+            int i = 0;
+            for (T erstatt : liste) {
+                if (c.compare(verdi, erstatt) < 0) {
+                    liste.leggInn(i, verdi);
+                    liste.fjern(plass);
+                    break;
+                }
+                i++;
+            }
+            plass++;
+        }
+        System.out.println(liste);
+        //initialisere en midelertidig variabel.
+
+        //while (lis.hasNext()) {
+        // T verdi = lis.next();
+        // while (c.compare(maksverdi,verdi) > 0) {
+        //maksverdi = verdi;
+        //}
+        //System.out.println(liste);
+        //Liste<String> liste12 = new DobbeltLenketListe<>();
+        //DobbeltLenketListe.sorter(liste12, Comparator.naturalOrder());
+        // }
+        // return maksverdi;
     }
-    }
+}
     // class DobbeltLenketListe
 
 
