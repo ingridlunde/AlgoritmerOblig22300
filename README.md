@@ -63,6 +63,10 @@ så bruker jeg .equals-metoden for å sammenligne den noden "peker" variablen ha
 og returnerer hhv. indeksplassen til noden som er "gjennfunnet" i sammenligningen, eller -1 hvis noden som er innpassert i medoden ikke kan gjennfinnes. 
 
 I oppgave 5
+er det laget en metode som legger verdier inn i listen. den starter med å lage en ny node i plass hode hvis listen er tom.
+eller hvis indeks er 0 lager den en ny node til høyre for hode, men hvis hode ikke er null, lager den en ny node til venstre.
+metoden tar vare på endringer i antall og endringer, som er helt avgjørende for at ikke oppg 8 skal kjøre i evighjeter.
+
  
 I oppgave 6
 Laget jeg boolean fjern(T verdi). Her inistierer jeg en tempverdi som jeg bruker når jeg sjekker om et tall er i listen. 
@@ -114,6 +118,11 @@ Og at omkringliggende noder blir omdirigert til å peke til nye steder i beholde
 
 
 I oppgave 10
+ Her gjør vi en innstikksmetode med comparator og liste.oppdater. Det er gjort på en måte som minner mye om hvoirdan man ville behandlet verdier i en vanlig liste.
+ Starter med å si at hvis listen er tom eller bare har èn verdi, så skal den avslutte.
+ Kjører igjennom så lenge liste er mindre en antall og bytter om plass på de verdiene til listen er lik "naturalOrder".
+ Siden mange av metodene jeg ville brukt i denne oppgaven er satt til privat, eller tuller med endringer i iteratoren, er dette den beste måten jeg kom frem til. 
+ Jeg har prøvd mye forskjellig, men dette er det hjeg fikk til å fungere.
 
 Litteraturliste
 
