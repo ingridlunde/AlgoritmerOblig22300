@@ -589,23 +589,34 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         if (liste.tom()) throw new NoSuchElementException("ingen noder i listen");
+        if (liste.antall() == 1) return;
+
+        for (int i = 1; i < liste.antall(); i++) {
+            T verdi = liste.hent(i);
+            int j = i-1;
+            while (j >= 0 && c.compare(liste.hent(j),verdi) > 0) {
+                liste.oppdater(j+1, liste.hent(j));
+                j = j-1;
+            }
+            liste.oppdater(j+1, verdi);
+        }
 
         // Iterator<T> lis = liste.iterator();
         //T maksverdi = lis.next();
-        int plass = 0;
+        /*int plass = 0;
         for (T verdi : liste) {
             System.out.println(verdi);
             int i = 0;
             for (T erstatt : liste) {
                 if (c.compare(verdi, erstatt) < 0) {
-                    liste.leggInn(i, verdi);
-                    liste.fjern(plass);
+                    //liste.leggInn(i, verdi);
+                    //liste.fjern(plass);
                     break;
                 }
                 i++;
             }
             plass++;
-        }
+        }*/
         System.out.println(liste);
         //initialisere en midelertidig variabel.
 
